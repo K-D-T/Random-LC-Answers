@@ -1,0 +1,23 @@
+class Solution {
+public:
+    string reverseWords(string s) {
+        vector<std::string> s2;
+        istringstream iss(s);
+
+        string w;
+
+        while(iss >> w){
+            s2.push_back(w);
+        }
+
+        string ret = "";
+        while(!s2.empty()){
+            ret += s2.back();
+            s2.pop_back();
+            ret += ' ';
+        }
+        ret = ret.substr(0, ret.size()-1);
+
+        return ret;
+    }
+};
