@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        
+        char cur = chars[0];
+        int cur_co = 1, loc = 0, size = 0;
+
+        if(chars.size()==0)
+        return 0;
+
+         for (int i = 1; i <= chars.size(); i++) {
+        if (i < chars.size() && chars[i] == cur) {
+            cur_co++;
+        } else {
+            chars[size++] = cur;
+
+            if (cur_co > 1) {
+                // Convert the count to characters and append
+                std::string countStr = std::to_string(cur_co);
+                for (char digit : countStr) {
+                    chars[size++] = digit;
+                }
+            }
+
+            if (i < chars.size()) {
+                cur = chars[i];
+                cur_co = 1;
+            }
+        }
+    }
+
+    return size;
+    }
+};
