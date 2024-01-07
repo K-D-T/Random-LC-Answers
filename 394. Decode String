@@ -1,0 +1,36 @@
+class Solution {
+public:
+    string decodeString(string s) {
+     
+     stack<int> nums;
+     stack<string> words;
+
+     string st; 
+     int num = 0;
+
+     for(char c: s){
+         if(isdigit(c)){
+             num = num * 10 + c - '0';
+         }else if(c == '['){
+            words.push(st);
+            st = "";
+            nums.push(num);
+            num = 0;
+         }else if(c == ']'){
+             string hold = st;
+             st = words.top();
+             words.pop();
+             int count = nums.top();
+             nums.pop();
+
+             while(count > 0){
+                 st += hold;
+                 count--;
+             }
+         }else{
+             st += c; 
+         }
+     }
+     return st;   
+    }
+};
